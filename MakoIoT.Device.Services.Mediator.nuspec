@@ -11,8 +11,8 @@
     </releaseNotes>
     <readme>docs\README.md</readme>
     <developmentDependency>false</developmentDependency>
-    <projectUrl>https://github.com/CShark-Hub/Mako-IoT..Device.Services.Mediator</projectUrl>
-    <repository type="git" url="https://github.com/CShark-Hub/Mako-IoT..Device.Services.Mediator" />
+    <projectUrl>https://github.com/CShark-Hub/Mako-IoT.Device.Services.Mediator</projectUrl>
+    <repository type="git" url="https://github.com/CShark-Hub/Mako-IoT.Device.Services.Mediator" />
     <copyright>Copyright (c) CSHARK Sp. z o. o.</copyright>
     <description>MAKO-IoT simple mediator library</description>
     <tags>nanoFramework C# csharp netmf netnf mako-iot mediator</tags>
