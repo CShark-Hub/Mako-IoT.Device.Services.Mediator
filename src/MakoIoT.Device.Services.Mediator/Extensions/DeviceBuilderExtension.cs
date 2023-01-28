@@ -1,5 +1,5 @@
-﻿using MakoIoT.Device.Services.DependencyInjection;
-using MakoIoT.Device.Services.Interface;
+﻿using MakoIoT.Device.Services.Interface;
+using nanoFramework.DependencyInjection;
 
 namespace MakoIoT.Device.Services.Mediator.Extensions
 {
@@ -14,10 +14,10 @@ namespace MakoIoT.Device.Services.Mediator.Extensions
 
         public static IDeviceBuilder AddMediator(this IDeviceBuilder builder, MediatorConfigurator configurator)
         {
-            DI.RegisterSingleton(typeof(IMediator), typeof(Mediator));
+            builder.Services.AddSingleton(typeof(IMediator), typeof(Mediator));
             var options = new MediatorOptions();
             configurator(options);
-            DI.RegisterInstance(typeof(MediatorOptions), options);
+            builder.Services.AddSingleton(typeof(MediatorOptions), options);
 
             return builder;
         }

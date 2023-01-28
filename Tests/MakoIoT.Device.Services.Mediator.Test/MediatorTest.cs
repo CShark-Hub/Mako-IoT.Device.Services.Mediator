@@ -1,5 +1,6 @@
-using MakoIoT.Device.Services.DependencyInjection;
+using nanoFramework.DependencyInjection;
 using nanoFramework.TestFramework;
+using System;
 
 namespace MakoIoT.Device.Services.Mediator.Test
 {
@@ -9,29 +10,29 @@ namespace MakoIoT.Device.Services.Mediator.Test
         [TestMethod]
         public void Publish_should_invoke_handler()
         {
-            DI.Clear();
-
+            var serviceCollection = new ServiceCollection();
             var handler = new TestEventHandler();
-            DI.RegisterInstance(typeof(TestEventHandler), handler);
+            serviceCollection.AddSingleton(typeof(TestEventHandler), handler);
+            var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var sut = new Mediator(null);
+            var sut = new Mediator(null, serviceProvider);
             sut.Subscribe(typeof(TestEvent), typeof(TestEventHandler));
 
             var @event = new TestEvent();
             sut.Publish(@event);
 
-            Assert.Same(@event, handler.Event);
+            Assert.AreSame(@event, handler.Event);
         }
 
         [TestMethod]
         public void Unsubscribe_should_remove_handler()
         {
-            DI.Clear();
-
+            var serviceCollection = new ServiceCollection();
             var handler = new TestEventHandler();
-            DI.RegisterInstance(typeof(TestEventHandler), handler);
+            serviceCollection.AddSingleton(typeof(TestEventHandler), handler);
+            var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var sut = new Mediator(null);
+            var sut = new Mediator(null, serviceProvider);
             sut.Subscribe(typeof(TestEvent), typeof(TestEventHandler));
 
             sut.Unsubscribe(typeof(TestEvent), typeof(TestEventHandler));
@@ -39,22 +40,21 @@ namespace MakoIoT.Device.Services.Mediator.Test
             var @event = new TestEvent();
             sut.Publish(@event);
 
-            Assert.Null(handler.Event);
+            Assert.IsNull(handler.Event);
         }
 
         [TestMethod]
         public void Publish_should_invoke_handlers_based_on_event_type()
         {
-            DI.Clear();
-
+            var serviceCollection = new ServiceCollection();
             var handler = new TestEventHandler();
-            DI.RegisterInstance(typeof(TestEventHandler), handler);
+            serviceCollection.AddSingleton(typeof(TestEventHandler), handler);
 
             var handler2 = new TestEventHandler2();
-            DI.RegisterInstance(typeof(TestEventHandler2), handler2);
+            serviceCollection.AddSingleton(typeof(TestEventHandler2), handler2);
+            var serviceProvider = serviceCollection.BuildServiceProvider();
 
-
-            var sut = new Mediator(null);
+            var sut = new Mediator(null, serviceProvider);
             sut.Subscribe(typeof(TestEvent), typeof(TestEventHandler));
             sut.Subscribe(typeof(TestEvent2), typeof(TestEventHandler2));
 
@@ -63,31 +63,31 @@ namespace MakoIoT.Device.Services.Mediator.Test
             sut.Publish(@event);
             sut.Publish(@event2);
 
-            Assert.Same(@event, handler.Event);
-            Assert.Same(@event2, handler2.Event);
+            Assert.AreSame(@event, handler.Event);
+            Assert.AreSame(@event2, handler2.Event);
         }
 
         [TestMethod]
         public void Publish_should_invoke_multiple_handlers_on_event()
         {
-            DI.Clear();
-
+            var serviceCollection = new ServiceCollection();
             var handler = new TestEventHandler();
-            DI.RegisterInstance(typeof(TestEventHandler), handler);
+            serviceCollection.AddSingleton(typeof(TestEventHandler), handler);
 
             var handler2 = new TestEventHandler2();
-            DI.RegisterInstance(typeof(TestEventHandler2), handler2);
+            serviceCollection.AddSingleton(typeof(TestEventHandler2), handler2);
+            var serviceProvider = serviceCollection.BuildServiceProvider();
 
 
-            var sut = new Mediator(null);
+            var sut = new Mediator(null, serviceProvider);
             sut.Subscribe(typeof(TestEvent), typeof(TestEventHandler));
             sut.Subscribe(typeof(TestEvent), typeof(TestEventHandler2));
 
             var @event = new TestEvent();
             sut.Publish(@event);
 
-            Assert.Same(@event, handler.Event);
-            Assert.Same(@event, handler2.Event);
+            Assert.AreSame(@event, handler.Event);
+            Assert.AreSame(@event, handler2.Event);
         }
     }
 }
