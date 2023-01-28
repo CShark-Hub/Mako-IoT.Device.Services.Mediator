@@ -42,6 +42,9 @@
       <HintPath>..\..\packages\nanoFramework.CoreLibrary.1.14.2\lib\mscorlib.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="nanoFramework.DependencyInjection">
+      <HintPath>..\..\packages\nanoFramework.DependencyInjection.1.0.22\lib\nanoFramework.DependencyInjection.dll</HintPath>
+    </Reference>
     <Reference Include="nanoFramework.Logging, Version=1.1.63.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\..\packages\nanoFramework.Logging.1.1.63\lib\nanoFramework.Logging.dll</HintPath>
       <Private>True</Private>
@@ -82,7 +85,7 @@
     <PropertyGroup>
       <WarningText>Update the Import path in nfproj to the correct nanoFramework.TestFramework NuGet package folder.</WarningText>
     </PropertyGroup>
-    <Warning Condition="!Exists('..\packages\nanoFramework.TestFramework.2.1.59\build\nanoFramework.TestFramework.targets')" Text="'$(WarningText)'" />
+    <Warning Condition="!Exists('..\..\packages\nanoFramework.TestFramework.2.1.59\build\nanoFramework.TestFramework.targets')" Text="'$(WarningText)'" />
     <Error Condition="!Exists('..\..\packages\nanoFramework.TestFramework.2.1.59\build\nanoFramework.TestFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\nanoFramework.TestFramework.2.1.59\build\nanoFramework.TestFramework.targets'))" />
   </Target>
   <Import Project="..\..\packages\nanoFramework.TestFramework.2.1.59\build\nanoFramework.TestFramework.targets" Condition="Exists('..\..\packages\nanoFramework.TestFramework.2.1.59\build\nanoFramework.TestFramework.targets')" />

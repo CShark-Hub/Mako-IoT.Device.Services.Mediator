@@ -14,13 +14,13 @@ namespace MakoIoT.Device.Services.Mediator.Test
             var handler = new TestEventHandler();
             DI.RegisterInstance(typeof(TestEventHandler), handler);
 
-            var sut = new Mediator(null);
+            var sut = new Mediator(null, null);
             sut.Subscribe(typeof(TestEvent), typeof(TestEventHandler));
 
             var @event = new TestEvent();
             sut.Publish(@event);
 
-            Assert.Same(@event, handler.Event);
+            Assert.AreSame(@event, handler.Event);
         }
 
         [TestMethod]
@@ -31,7 +31,7 @@ namespace MakoIoT.Device.Services.Mediator.Test
             var handler = new TestEventHandler();
             DI.RegisterInstance(typeof(TestEventHandler), handler);
 
-            var sut = new Mediator(null);
+            var sut = new Mediator(null, null);
             sut.Subscribe(typeof(TestEvent), typeof(TestEventHandler));
 
             sut.Unsubscribe(typeof(TestEvent), typeof(TestEventHandler));
@@ -39,7 +39,7 @@ namespace MakoIoT.Device.Services.Mediator.Test
             var @event = new TestEvent();
             sut.Publish(@event);
 
-            Assert.Null(handler.Event);
+            Assert.IsNull(handler.Event);
         }
 
         [TestMethod]
@@ -54,7 +54,7 @@ namespace MakoIoT.Device.Services.Mediator.Test
             DI.RegisterInstance(typeof(TestEventHandler2), handler2);
 
 
-            var sut = new Mediator(null);
+            var sut = new Mediator(null, null);
             sut.Subscribe(typeof(TestEvent), typeof(TestEventHandler));
             sut.Subscribe(typeof(TestEvent2), typeof(TestEventHandler2));
 
@@ -63,8 +63,8 @@ namespace MakoIoT.Device.Services.Mediator.Test
             sut.Publish(@event);
             sut.Publish(@event2);
 
-            Assert.Same(@event, handler.Event);
-            Assert.Same(@event2, handler2.Event);
+            Assert.AreSame(@event, handler.Event);
+            Assert.AreSame(@event2, handler2.Event);
         }
 
         [TestMethod]
@@ -79,15 +79,15 @@ namespace MakoIoT.Device.Services.Mediator.Test
             DI.RegisterInstance(typeof(TestEventHandler2), handler2);
 
 
-            var sut = new Mediator(null);
+            var sut = new Mediator(null, null);
             sut.Subscribe(typeof(TestEvent), typeof(TestEventHandler));
             sut.Subscribe(typeof(TestEvent), typeof(TestEventHandler2));
 
             var @event = new TestEvent();
             sut.Publish(@event);
 
-            Assert.Same(@event, handler.Event);
-            Assert.Same(@event, handler2.Event);
+            Assert.AreSame(@event, handler.Event);
+            Assert.AreSame(@event, handler2.Event);
         }
     }
 }
