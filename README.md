@@ -1,4 +1,5 @@
-# Project readme
+#  Mako-IoT.Device.Services.Mediator
+Mediator pattern implementation. Provides in-process publisher-subscriber communication while keeping all parties decoupled.
 
 ## How to manually sync fork
 - Clone repository and navigate into folder
