@@ -1,13 +1,65 @@
 #  Mako-IoT.Device.Services.Mediator
 Mediator pattern implementation. Provides in-process publisher-subscriber communication while keeping all parties decoupled.
 
-## How to manually sync fork
-- Clone repository and navigate into folder
-- From command line execute bellow commands
-- **git remote add upstream https://github.com/CShark-Hub/Mako-IoT.Base.git**
-- **git fetch upstream**
-- **git rebase upstream/main**
-- If there are any conflicts, resolve them
-  - After run **git rebase --continue**
-  - Check for conflicts again
-- **git push -f origin main**
+## Usage
+See [Mediator](https://github.com/CShark-Hub/Mako-IoT.Device.Samples/tree/main/Mediator) sample
+
+Create classes for your events
+```c#
+public class Event1 : IEvent
+{
+    public string Data { get; set; }
+}
+
+public class Event2 : IEvent
+{
+    public string Text { get; set; }
+}
+```
+Your event subscriber must implement _IEventHandler_ interface
+```c#
+public class Service2 : IEventHandler
+{
+    public void Handle(IEvent @event)
+    {
+        switch (@event)
+        {
+            case Event1 event1:
+                Debug.WriteLine($"[{nameof(Service2)}] Event1 received. The data is: {event1.Data}");
+                break;
+            case Event2 event2:
+                Debug.WriteLine($"[{nameof(Service2)}] Event2 received The text is: {event2.Text}");
+                break;
+        }
+    }
+}
+```
+Use _IMediator_ to publish events
+```c#
+public class Service1 : IService1
+{
+    private readonly IMediator _mediator;
+
+    public Service1(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    public void DoSomething()
+    {
+        _mediator.Publish(new Event2 { Text = "Hello from Service1 !" });
+    }
+}
+```
+Register Mediator and subscribers in [_DeviceBuilder_](https://github.com/CShark-Hub/Mako-IoT.Device)
+```c#
+DeviceBuilder.Create()
+  .AddMediator(options =>
+  {
+      options.AddSubscriber(typeof(Event1), typeof(Service2));
+      options.AddSubscriber(typeof(Event2), typeof(Service2));
+  })
+  .Build()
+  .Start()
+```
+
