@@ -1,6 +1,6 @@
-﻿namespace MakoIoT.Device.Services.Mediator.Test
+﻿namespace MakoIoT.Device.Services.Mediator.Test.Mocks
 {
-    public class TestEventHandler : IEventHandler
+    public class TestEventHandler2 : IEventHandler
     {
         public IEvent Event { get; private set; }
 

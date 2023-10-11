@@ -27,11 +27,11 @@
     <RunSettingsFilePath>$(MSBuildProjectDirectory)\nano.runsettings</RunSettingsFilePath>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MediatorTest.cs" />
-    <Compile Include="TestEvent.cs" />
-    <Compile Include="TestEvent2.cs" />
-    <Compile Include="TestEventHandler.cs" />
-    <Compile Include="TestEventHandler2.cs" />
+    <Compile Include="MediatorTests.cs" />
+    <Compile Include="Mocks\TestEvent.cs" />
+    <Compile Include="Mocks\TestEvent2.cs" />
+    <Compile Include="Mocks\TestEventHandler.cs" />
+    <Compile Include="Mocks\TestEventHandler2.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib, Version=1.14.3.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
