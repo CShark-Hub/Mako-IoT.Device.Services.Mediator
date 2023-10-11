@@ -26,11 +26,7 @@ namespace MakoIoT.Device.Services.Mediator
             _serviceProvider = serviceProvider;
         }
 
-        /// <summary>
-        /// Subscribes event handler to an event.
-        /// </summary>
-        /// <param name="eventType">Type of the event. The event must implement IEvent interface.</param>
-        /// <param name="subscriber">The subscriber.</param>
+        /// <inheritdoc />
         public void Subscribe(Type eventType, IEventHandler subscriber)
         {
             var eventName = eventType.FullName;
@@ -47,11 +43,7 @@ namespace MakoIoT.Device.Services.Mediator
             }
         }
 
-        /// <summary>
-        /// Subscribes event handler to an event.
-        /// </summary>
-        /// <param name="eventType">Type of the event. The event must implement IEvent interface.</param>
-        /// <param name="subscriberType">Type of the subscriber (as registered in DI). The subscriber must implement IEventHandler interface.</param>
+        /// <inheritdoc />
         public void Subscribe(Type eventType, Type subscriberType)
         {
             var eventName = eventType.FullName;
@@ -68,11 +60,7 @@ namespace MakoIoT.Device.Services.Mediator
             }
         }
 
-        /// <summary>
-        /// Unsubscribes event handler from an event.
-        /// </summary>
-        /// <param name="eventType">Type of the event.</param>
-        /// <param name="subscriber">The subscriber.</param>
+        /// <inheritdoc />
         public void Unsubscribe(Type eventType, IEventHandler subscriber)
         {
             var eventName = eventType.FullName;
@@ -88,11 +76,7 @@ namespace MakoIoT.Device.Services.Mediator
             }
         }
 
-        /// <summary>
-        /// Unsubscribes event handler from an event.
-        /// </summary>
-        /// <param name="eventType">Type of the event.</param>
-        /// <param name="subscriberType">Type of the subscriber (as registered in DI).</param>
+        /// <inheritdoc />
         public void Unsubscribe(Type eventType, Type subscriberType)
         {
             var eventName = eventType.FullName;
@@ -108,10 +92,7 @@ namespace MakoIoT.Device.Services.Mediator
             }
         }
 
-        /// <summary>
-        /// Publishes on event and calls each subscriber.
-        /// </summary>
-        /// <param name="e">The event.</param>
+        /// <inheritdoc />
         public void Publish(IEvent e)
         {
             var eventName = e.GetType().FullName;

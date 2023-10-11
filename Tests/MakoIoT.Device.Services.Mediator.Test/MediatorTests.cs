@@ -16,7 +16,7 @@ namespace MakoIoT.Device.Services.Mediator.Test
             var serviceCollection = new ServiceCollection();
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var sut = new Mediator(null, serviceProvider);
+            var sut = (IMediator) new Mediator(null, serviceProvider);
             sut.Subscribe(typeof(TestEvent), handler);
 
             var @event = new TestEvent();
@@ -39,7 +39,7 @@ namespace MakoIoT.Device.Services.Mediator.Test
             
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var sut = new Mediator(null, serviceProvider);
+            var sut = (IMediator) new Mediator(null, serviceProvider);
             sut.Subscribe(typeof(TestEvent), typeof(TestEventHandler));
 
             var @event = new TestEvent();
@@ -63,7 +63,7 @@ namespace MakoIoT.Device.Services.Mediator.Test
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var sut = new Mediator(null, serviceProvider);
+            var sut = (IMediator) new Mediator(null, serviceProvider);
             sut.Subscribe(typeof(TestEvent), typeof(TestEventHandler));
             sut.Subscribe(typeof(TestEvent), handler2);
 
@@ -88,7 +88,7 @@ namespace MakoIoT.Device.Services.Mediator.Test
             serviceCollection.AddSingleton(typeof(TestEventHandler2), handler2);
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var sut = new Mediator(null, serviceProvider);
+            var sut = (IMediator) new Mediator(null, serviceProvider);
             sut.Subscribe(typeof(TestEvent), typeof(TestEventHandler));
             sut.Subscribe(typeof(TestEvent2), typeof(TestEventHandler2));
 
@@ -112,7 +112,7 @@ namespace MakoIoT.Device.Services.Mediator.Test
             serviceCollection.AddSingleton(typeof(TestEventHandler2), handler2);
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var sut = new Mediator(null, serviceProvider);
+            var sut = (IMediator) new Mediator(null, serviceProvider);
             sut.Subscribe(typeof(TestEvent), typeof(TestEventHandler));
             sut.Subscribe(typeof(TestEvent), typeof(TestEventHandler2));
 
@@ -132,7 +132,7 @@ namespace MakoIoT.Device.Services.Mediator.Test
             var serviceCollection = new ServiceCollection();
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var sut = new Mediator(null, serviceProvider);
+            var sut = (IMediator) new Mediator(null, serviceProvider);
             sut.Subscribe(typeof(TestEvent), handler1);
             sut.Subscribe(typeof(TestEvent), handler2);
             sut.Unsubscribe(typeof(TestEvent), handler1);
@@ -158,7 +158,7 @@ namespace MakoIoT.Device.Services.Mediator.Test
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var sut = new Mediator(null, serviceProvider);
+            var sut = (IMediator) new Mediator(null, serviceProvider);
             sut.Subscribe(typeof(TestEvent), typeof(TestEventHandler));
             sut.Unsubscribe(typeof(TestEvent), typeof(TestEventHandler));
 
