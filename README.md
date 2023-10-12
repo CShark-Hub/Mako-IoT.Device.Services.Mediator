@@ -51,7 +51,7 @@ public class Service1 : IService1
     }
 }
 ```
-Register Mediator and subscribers in [_DeviceBuilder_](https://github.com/CShark-Hub/Mako-IoT.Device)
+Register Mediator and singleton subscribers in [_DeviceBuilder_](https://github.com/CShark-Hub/Mako-IoT.Device)
 ```c#
 DeviceBuilder.Create()
   .AddMediator(options =>
@@ -62,4 +62,23 @@ DeviceBuilder.Create()
   .Build()
   .Start()
 ```
+For transient and scoped services you can use the `Subscribe` and `Unsubscribe` overloads that take a specific instance.
+```c#
+public class TransientService : IDisposable
+{
+    private readonly IMediator _mediator;
 
+    public TransientService(IMediator mediator)
+    {
+        _mediator = mediator;
+        _mediator.Subscribe(typeof(Event1), this);
+        _mediator.Subscribe(typeof(Event2), this);
+    }
+
+    public void Dispose()
+    {
+        _mediator.Unsubscribe(typeof(Event1), this);
+        _mediator.Unsubscribe(typeof(Event2), this);
+    }
+}
+```
