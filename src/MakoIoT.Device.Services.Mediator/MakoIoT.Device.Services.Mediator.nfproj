@@ -25,6 +25,7 @@
     <Compile Include="IMediator.cs" />
     <Compile Include="Mediator.cs" />
     <Compile Include="MediatorOptions.cs" />
+    <Compile Include="MediatorOptionsSubscriber.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MakoIoT.Device.Services.Interface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">

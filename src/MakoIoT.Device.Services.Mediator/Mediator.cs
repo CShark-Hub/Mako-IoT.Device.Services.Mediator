@@ -1,5 +1,4 @@
-﻿using nanoFramework.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections;
 
 namespace MakoIoT.Device.Services.Mediator
@@ -13,17 +12,20 @@ namespace MakoIoT.Device.Services.Mediator
         private readonly Hashtable _subscribers = new();
         private readonly Hashtable _subscriberTypes = new();
 
-        public Mediator(MediatorOptions options, IServiceProvider serviceProvider)
+        public Mediator(IServiceProvider serviceProvider)
         {
-            if (options != null)
+            _serviceProvider = serviceProvider;
+        }
+
+        public Mediator(MediatorOptions options, IServiceProvider serviceProvider): this(serviceProvider)
+        {
+            if (options is not null)
             {
-                foreach (Subscription sub in options.Subscribers)
+                foreach (MediatorOptionsSubscriber subscriber in options.Subscribers)
                 {
-                    Subscribe(sub.EventType, sub.SubscriberType);
+                    Subscribe(subscriber.EventType, subscriber.SubscriberType);
                 }
             }
-
-            _serviceProvider = serviceProvider;
         }
 
         /// <inheritdoc />
