@@ -1,5 +1,5 @@
 using MakoIoT.Device.Services.Mediator.Test.Mocks;
-using nanoFramework.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using nanoFramework.TestFramework;
 
 namespace MakoIoT.Device.Services.Mediator.Test
