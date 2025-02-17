@@ -17,10 +17,10 @@
     <description>MAKO-IoT simple mediator library</description>
     <tags>nanoFramework C# csharp netmf netnf mako-iot mediator</tags>
     <dependencies>
-      <dependency id="nanoFramework.CoreLibrary" version="1.15.5" />
-      <dependency id="nanoFramework.System.Collections" version="1.5.45" />
+      <dependency id="nanoFramework.CoreLibrary" version="1.16.11" />
+      <dependency id="nanoFramework.System.Collections" version="1.5.59" />
       <dependency id="MakoIoT.Device.Services.Interface" version="1.0.48.22567" />
-      <dependency id="nanoFramework.DependencyInjection" version="1.1.11" />
+      <dependency id="nanoFramework.DependencyInjection" version="1.1.25" />
     </dependencies>
   </metadata>
   <files>
